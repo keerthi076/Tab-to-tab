@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>tab to tab</title>
+</head>
+<body>
+	<div id="container">
+		<input type="text" id="inputitem"><br>
+		<button onclick= "add1()" >ADD</button><br><br>
+	<div id="list">	<ol>
+		</ol>
+		
+		</div></div>
+
+		<script>
+			const input=document.querySelector("input");
+			const ol=document.querySelector("ol");
+			var storearray=[];
+
+function add1(){
+var existing =JSON.parse(localStorage.getItem("storearray"));
+  if(input.value!=""){
+  var entry=input.value;
+  if(existing == null) existing = [];
+  localStorage.setItem("entry",JSON.stringify(entry));
+  existing.push(entry);
+  input.value="";
+  localStorage.setItem("storearray",JSON.stringify(existing));
+  var go=JSON.parse(localStorage.getItem("storearray"));
+  listing(go);
+ }
+}
+function listing(go){
+ 	ol.innerHTML="";
+    go.forEach((x) => {
+ 	const li=document.createElement("li");
+	li.innerHTML=x;
+	ol.append(li);
+});
+}
+listing(JSON.parse(localStorage.storearray));
+window.onstorage = () => {
+  listing(JSON.parse(localStorage.storearray));
+};
+
+</script>
+<style>
+#container{
+	text-align:center;
+	align-items:center;
+	justify-content:center;
+	margin-top:150px;
+
+}
+input{
+	max-width:200px;
+	width:100%;
+	height:30px;
+	border-radius:4px;
+}
+#list{
+	display:flex;
+	text-align:center;
+	justify-content:center;
+
+}
+ol{
+	list-style-position:;
+}
